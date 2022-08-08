@@ -144,6 +144,15 @@ class TemplateLoader extends FileLoader {
     static async fromDirectory(Template, path, options = {}) {
         const method = 'fromDirectory';
 
+        //use the file loader functions from options if it is given
+        if(options.loadFileBuffer ){
+            TemplateLoader.loadFileBuffer = options.loadFileBuffer;
+        }
+
+        if(options.loadFileContents){
+            TemplateLoader.loadFileContents = options.loadFileContents;
+        }
+
         // grab the README.md
         const readmeContents = await TemplateLoader.loadFileContents(path, 'README.md');
 
